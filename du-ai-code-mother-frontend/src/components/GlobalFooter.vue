@@ -8,7 +8,7 @@
             rel="noopener noreferrer"
             class="author-link"
         >
-          编程导航原创项目 by 程序员鱼皮
+          应用生成智能体项目 by 程序员duhui
         </a>
       </p>
     </div>

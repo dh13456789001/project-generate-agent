@@ -1,150 +1,101 @@
 <template>
   <a-layout-header class="header">
-    <div class="header-content">
-      <div class="header-left">
-        <div class="logo-container">
-          <!-- 这里暂时使用简单的图标替代 logo.png，实际项目中需要替换为真实的 logo 图片 -->
-          <a-icon type="code" class="logo-icon" />
-          <span class="site-title">编程导航</span>
-        </div>
-        
-        <a-menu 
-          mode="horizontal"
-          :items="menuItems"
-          @click="handleMenuClick"
-          class="header-menu"
-          :selectedKeys="[selectedMenuKey]"
+    <a-row :wrap="false">
+      <!-- 左侧：Logo和标题 -->
+      <a-col flex="200px">
+        <RouterLink to="/">
+          <div class="header-left">
+            <img class="logo" src="@/assets/logo.png" alt="Logo" />
+            <h1 class="site-title">应用生成</h1>
+          </div>
+        </RouterLink>
+      </a-col>
+      <!-- 中间：导航菜单 -->
+      <a-col flex="auto">
+        <a-menu
+            v-model:selectedKeys="selectedKeys"
+            mode="horizontal"
+            :items="menuItems"
+            @click="handleMenuClick"
         />
-      </div>
-      
-      <div class="header-right">
-        <!-- 暂时使用登录按钮替代用户头像和昵称 -->
-        <a-button type="primary" @click="handleLogin">
-          <a-icon type="user" /> 登录
-        </a-button>
-      </div>
-    </div>
+      </a-col>
+      <!-- 右侧：用户操作区域 -->
+      <a-col>
+        <div class="user-login-status">
+          <a-button type="primary">登录</a-button>
+        </div>
+      </a-col>
+    </a-row>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { MenuProps } from 'ant-design-vue';
-import { Button, Menu, Layout } from 'ant-design-vue';
-import { CodeOutlined, UserOutlined } from '@ant-design/icons-vue';
+import { h, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import type { MenuProps } from 'ant-design-vue'
 
-// 定义菜单项类型
-interface MenuItem {
-  key: string;
-  label: string;
-  path: string;
-  icon?: any;
-}
+const router = useRouter()
+// 当前选中菜单
+const selectedKeys = ref<string[]>(['/'])
+// 监听路由变化，更新当前选中菜单
+router.afterEach((to, from, next) => {
+  selectedKeys.value = [to.path]
+})
 
-// 菜单项数据
-const menuItems: MenuItem[] = [
+// 菜单配置项
+const menuItems = ref([
   {
-    key: 'home',
+    key: '/',
     label: '首页',
-    path: '/',
+    title: '首页',
   },
   {
-    key: 'about',
+    key: '/about',
     label: '关于',
-    path: '/about',
+    title: '关于我们',
   },
   {
-    key: 'features',
-    label: '功能',
-    path: '/features',
+    key: 'others',
+    label: h('a', { href: 'https://www.codefather.cn', target: '_blank' }, '更多资源'),
+    title: '更多资源',
   },
-  {
-    key: 'docs',
-    label: '文档',
-    path: '/docs',
-  },
-];
+])
 
-// 当前选中的菜单项
-const selectedMenuKey = ref('home');
-
-// 处理菜单点击事件
-const handleMenuClick = (e: any) => {
-  selectedMenuKey.value = e.key;
-  // 实际项目中可以在这里处理路由跳转
-};
-
-// 处理登录点击事件
-const handleLogin = () => {
-  console.log('用户点击了登录按钮');
-  // 实际项目中可以跳转到登录页面
-};
+// 处理菜单点击
+const handleMenuClick: MenuProps['onClick'] = (e) => {
+  const key = e.key as string
+  selectedKeys.value = [key]
+  // 跳转到对应页面
+  if (key.startsWith('/')) {
+    router.push(key)
+  }
+}
 </script>
 
 <style scoped>
 .header {
-  background-color: #fff;
+  background: #fff;
   padding: 0 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 64px;
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 .header-left {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-right: 48px;
-}
-
-.logo-icon {
-  font-size: 24px;
-  color: #1890ff;
-  margin-right: 8px;
+.logo {
+  height: 48px;
+  width: 48px;
 }
 
 .site-title {
+  margin: 0;
   font-size: 18px;
-  font-weight: 600;
   color: #1890ff;
 }
 
-.header-menu {
-  border-bottom: none;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .header-content {
-    padding: 0 16px;
-  }
-  
-  .header-menu {
-    display: none;
-  }
-  
-  .logo-container {
-    margin-right: 0;
-  }
+.ant-menu-horizontal {
+  border-bottom: none !important;
 }
 </style>
