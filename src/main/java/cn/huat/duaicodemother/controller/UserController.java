@@ -17,6 +17,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.mybatisflex.core.paginate.Page;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     @Resource
@@ -155,6 +157,7 @@ public class UserController {
     @PostMapping("/logout")
     public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
         ThrowUtils.throwIf(request == null, ErrorCode.PARAMS_ERROR);
+        log.info("用户退出登录");
         boolean result = userService.userLogout(request);
         return ResultUtils.success(result);
     }
