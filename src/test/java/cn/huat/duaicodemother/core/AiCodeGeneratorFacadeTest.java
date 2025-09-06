@@ -36,4 +36,25 @@ class AiCodeGeneratorFacadeTest {
         Assertions.assertNotNull(completeContent);
     }
 
+    @Test
+    void generateAndSaveCodeStreamAdvance() {
+        Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream("精美的登录页面，不超过100行", CodeGenTypeEnum.MULTI_FILE);
+        // 阻塞等待所有数据收集完成
+        List<String> result = codeStream.collectList().block();
+        // 验证结果
+        Assertions.assertNotNull(result);
+        String completeContent = String.join("", result);
+        Assertions.assertNotNull(completeContent);
+    }
+
+    @Test
+    void generateAndSaveCodeStreamAdvanceByMyNeed() {
+        Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream("一个可视化的视频分享平台（类似与哔哩哔哩）的数据面板", CodeGenTypeEnum.MULTI_FILE);
+        // 阻塞等待所有数据收集完成
+        List<String> result = codeStream.collectList().block();
+        // 验证结果
+        Assertions.assertNotNull(result);
+        String completeContent = String.join("", result);
+        Assertions.assertNotNull(completeContent);
+    }
 }
