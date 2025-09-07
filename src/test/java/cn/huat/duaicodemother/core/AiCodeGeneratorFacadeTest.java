@@ -20,14 +20,15 @@ class AiCodeGeneratorFacadeTest {
 
     @Test
     void generateAndSaveCode() {
-        File file = aiCodeGeneratorFacade.generateAndSaveCode("任务记录网站", CodeGenTypeEnum.MULTI_FILE);
+        File file = aiCodeGeneratorFacade.generateAndSaveCode("任务记录网站", CodeGenTypeEnum.MULTI_FILE,1L);
         Assertions.assertNotNull(file);
     }
 
 
     @Test
     void generateAndSaveCodeStream() {
-        Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream("任务记录网站，不超过50行", CodeGenTypeEnum.MULTI_FILE);
+        Flux<String> codeStream = aiCodeGeneratorFacade
+                .generateAndSaveCodeStream("任务记录网站，不超过50行", CodeGenTypeEnum.MULTI_FILE, 1L);
         // 阻塞等待所有数据收集完成
         List<String> result = codeStream.collectList().block();
         // 验证结果
@@ -38,7 +39,8 @@ class AiCodeGeneratorFacadeTest {
 
     @Test
     void generateAndSaveCodeStreamAdvance() {
-        Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream("精美的登录页面，不超过100行", CodeGenTypeEnum.MULTI_FILE);
+        Flux<String> codeStream = aiCodeGeneratorFacade
+                .generateAndSaveCodeStream("精美的登录页面，不超过100行", CodeGenTypeEnum.MULTI_FILE,1L);
         // 阻塞等待所有数据收集完成
         List<String> result = codeStream.collectList().block();
         // 验证结果
@@ -49,7 +51,9 @@ class AiCodeGeneratorFacadeTest {
 
     @Test
     void generateAndSaveCodeStreamAdvanceByMyNeed() {
-        Flux<String> codeStream = aiCodeGeneratorFacade.generateAndSaveCodeStream("一个可视化的视频分享平台（类似与哔哩哔哩）的数据面板", CodeGenTypeEnum.MULTI_FILE);
+        Flux<String> codeStream = aiCodeGeneratorFacade
+                .generateAndSaveCodeStream("一个可视化的视频分享平台（类似与哔哩哔哩）的数据面板",
+                        CodeGenTypeEnum.MULTI_FILE, 1L);
         // 阻塞等待所有数据收集完成
         List<String> result = codeStream.collectList().block();
         // 验证结果
