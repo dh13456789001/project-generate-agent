@@ -9,7 +9,7 @@ import cn.hutool.core.util.StrUtil;
 /**
  * 多文件代码保存器
  *
- * @author yupi
+ * @author duhui
  */
 public class MultiFileCodeFileSaverTemplate extends CodeFileSaverTemplate<MultiFileCodeResult> {
 

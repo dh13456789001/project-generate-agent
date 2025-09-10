@@ -3,7 +3,7 @@ package cn.huat.duaicodemother.core.parse;
 /**
  * 代码解析器策略接口
  * 
- * @author yupi
+ * @author duhui
  */
 public interface CodeParser<T> {
 
