@@ -1,6 +1,6 @@
 package cn.huat.duaicodemother.core.parse;
 
-import cn.huat.duaicodemother.result.MultiFileCodeResult;
+import cn.huat.duaicodemother.ai.model.MultiFileCodeResult;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

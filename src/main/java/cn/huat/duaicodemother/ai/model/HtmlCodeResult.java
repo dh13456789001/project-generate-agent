@@ -1,4 +1,4 @@
-package cn.huat.duaicodemother.result;
+package cn.huat.duaicodemother.ai.model;
 
 import dev.langchain4j.model.output.structured.Description;
 import lombok.Data;

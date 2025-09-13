@@ -1,6 +1,6 @@
 spring:
   application:
-    name: yu-ai-code-mother-backend
+    name: du-ai-code-mother-backend
   # mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,11 +9,26 @@ spring:
     password: root
   profiles:
     active: dev
+  # redis
+  data:
+    redis:
+      host: 192.168.6.142
+      port: 6379
+      password: 123321
+      ttl: 3600
+      database: 13
+  session:
+    store-type: redis
+    timeout: 2592000
 
 server:
   port: 8123
   servlet:
     context-path: /api
+    # cookie 30 天过期
+    session:
+      cookie:
+        max-age: 2592000
 
 mybatis-flex:
   configuration:

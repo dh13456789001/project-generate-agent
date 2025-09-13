@@ -3,8 +3,8 @@ package cn.huat.duaicodemother.core.saver;
 import cn.huat.duaicodemother.exception.BusinessException;
 import cn.huat.duaicodemother.exception.ErrorCode;
 import cn.huat.duaicodemother.model.enums.CodeGenTypeEnum;
-import cn.huat.duaicodemother.result.HtmlCodeResult;
-import cn.huat.duaicodemother.result.MultiFileCodeResult;
+import cn.huat.duaicodemother.ai.model.HtmlCodeResult;
+import cn.huat.duaicodemother.ai.model.MultiFileCodeResult;
 
 import java.io.File;
 

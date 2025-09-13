@@ -1,13 +1,11 @@
 package cn.huat.duaicodemother.ai;
 
-import cn.huat.duaicodemother.result.HtmlCodeResult;
-import cn.huat.duaicodemother.result.MultiFileCodeResult;
+import cn.huat.duaicodemother.ai.model.HtmlCodeResult;
+import cn.huat.duaicodemother.ai.model.MultiFileCodeResult;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest

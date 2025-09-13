@@ -1,7 +1,7 @@
 package cn.huat.duaicodemother.core;
 
-import cn.huat.duaicodemother.result.HtmlCodeResult;
-import cn.huat.duaicodemother.result.MultiFileCodeResult;
+import cn.huat.duaicodemother.ai.model.HtmlCodeResult;
+import cn.huat.duaicodemother.ai.model.MultiFileCodeResult;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

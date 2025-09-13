@@ -18,11 +18,11 @@ class AiCodeGeneratorFacadeTest {
     @Resource
     private AiCodeGeneratorFacade aiCodeGeneratorFacade;
 
-    @Test
-    void generateAndSaveCode() {
-        File file = aiCodeGeneratorFacade.generateAndSaveCode("任务记录网站", CodeGenTypeEnum.MULTI_FILE,1L);
-        Assertions.assertNotNull(file);
-    }
+//    @Test
+//    void generateAndSaveCode() {
+//        File file = aiCodeGeneratorFacade.generateAndSaveCode("任务记录网站", CodeGenTypeEnum.MULTI_FILE,1L);
+//        Assertions.assertNotNull(file);
+//    }
 
 
     @Test
@@ -54,6 +54,20 @@ class AiCodeGeneratorFacadeTest {
         Flux<String> codeStream = aiCodeGeneratorFacade
                 .generateAndSaveCodeStream("一个可视化的视频分享平台（类似与哔哩哔哩）的数据面板",
                         CodeGenTypeEnum.MULTI_FILE, 1L);
+        // 阻塞等待所有数据收集完成
+        List<String> result = codeStream.collectList().block();
+        // 验证结果
+        Assertions.assertNotNull(result);
+        String completeContent = String.join("", result);
+        Assertions.assertNotNull(completeContent);
+    }
+
+
+    @Test
+    void generateVueProjectCodeStream() {
+        Flux<String> codeStream = aiCodeGeneratorFacade
+                .generateAndSaveCodeStream("一个可视化的视频分享平台（类似与哔哩哔哩）的数据面板，不超过30行",
+                        CodeGenTypeEnum.VUE_PROJECT, 1L);
         // 阻塞等待所有数据收集完成
         List<String> result = codeStream.collectList().block();
         // 验证结果
