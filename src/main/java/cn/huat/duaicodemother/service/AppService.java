@@ -1,5 +1,6 @@
 package cn.huat.duaicodemother.service;
 
+import cn.huat.duaicodemother.model.dto.app.AppAddRequest;
 import cn.huat.duaicodemother.model.dto.app.AppQueryRequest;
 import cn.huat.duaicodemother.model.entity.User;
 import cn.huat.duaicodemother.model.vo.AppVO;
@@ -54,4 +55,8 @@ public interface AppService extends IService<App> {
      * @return
      */
     String deployApp(Long appId, User loginUser);
+
+    void generateAppScreenshotAsync(Long appId, String appUrl);
+
+    Long createApp(AppAddRequest appAddRequest, User loginUser);
 }

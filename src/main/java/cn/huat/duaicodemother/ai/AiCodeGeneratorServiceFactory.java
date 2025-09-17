@@ -1,6 +1,6 @@
 package cn.huat.duaicodemother.ai;
 
-import cn.huat.duaicodemother.ai.tools.FileWriteTool;
+import cn.huat.duaicodemother.ai.tools.*;
 import cn.huat.duaicodemother.config.ReasoningStreamingChatModelConfig;
 import cn.huat.duaicodemother.config.RedisChatMemoryStoreConfig;
 import cn.huat.duaicodemother.exception.BusinessException;
@@ -106,6 +106,10 @@ public class AiCodeGeneratorServiceFactory {
         );
     }
 
+
+    @Resource
+    private ToolManager toolManager;
+
     /**
      * 创建新的 AI 服务实例
      */
@@ -128,7 +132,9 @@ public class AiCodeGeneratorServiceFactory {
                         .streamingChatModel(reasoningStreamingChatModel)
                         .chatMemory(chatMemory)
                         .chatMemoryProvider((memoryId) -> chatMemory)
-                        .tools(new FileWriteTool())
+                        .tools(
+                               toolManager.getAllTools()
+                        )
                         .hallucinatedToolNameStrategy((toolExecutionRequest)->
                             ToolExecutionResultMessage.from( toolExecutionRequest,"Error：there is no tool called "+toolExecutionRequest.name())
                         )
